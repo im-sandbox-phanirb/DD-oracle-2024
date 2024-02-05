@@ -30,7 +30,7 @@ runs:
         env: 
           GITHUB_TOKEN: ${{ inputs.OCI_TOKEN }}
         with:
-          tag_name: ${{ inputs.tag_name }
+          tag_name: ${{ inputs.tag_name }}
           release_name: ${{ inputs.release_name }}
           draft: false
           prerelease: false
