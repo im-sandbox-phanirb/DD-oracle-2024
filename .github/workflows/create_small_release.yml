@@ -1,4 +1,4 @@
-name: Create release
+name: Create custom release
 on:
   workflow_dispatch:
     inputs:
@@ -38,11 +38,11 @@ jobs:
     - name: check release asset
       run: |
         ls -la
-        cd MY_INTEGRATION_FILE
+        cd archive
         ls -la
         cd ..
         mkdir custom_release
-        cp MY_INTEGRATION_FILE/archive/${{ inputs.file_name }} custom_release
+        cp archive/${{ inputs.file_name }} custom_release
         ls -la custom_release
 
     
