@@ -1,10 +1,13 @@
 name: Create release
 on:
   workflow_dispatch:
+  
 jobs:
   create-release:
     runs-on: ubuntu-latest
+    
     steps:
+    
     - name: checkout repository
       uses: action/checkout@v3
 
@@ -47,6 +50,13 @@ jobs:
     - name: Unzip Artifact
       run: |
         unzip -o MY_INTEGRATION_FILE.zip
+
+    - name: check release asset
+      run: |
+        ls -la
+        cd MY_INTEGRATION_FILE
+        ls -la
+        
       
         
         
