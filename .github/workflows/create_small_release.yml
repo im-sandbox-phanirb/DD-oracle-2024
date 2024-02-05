@@ -47,16 +47,10 @@ jobs:
         echo "Custom release created"
 
     - name: Call create release workflow
-      uses: actions/github-script@main
-      with:
-        script: | 
-          github.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  workflow_id: 'create_release.yml',
-                  ref: 'main',
-                  inputs: {
-                    release_files: 'custom_release'                 
-                  }
-                });   
+      uses: ./actions/create-custom-release
+      with:               
+        release_files: custom_release
+        tag_name: 2.0.v${{ github.run_number }}
+        release_name: 2.0.v${{ github.run_number }}
+
     

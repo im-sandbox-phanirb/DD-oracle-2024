@@ -16,27 +16,11 @@ jobs:
     - name: checkout repository
       uses: actions/checkout@v3
 
-    - name: Create Zip
-      run: |
-        zip -r MY_INTEGRATION_FILE.zip ./${{ inputs.release_files }}
-        
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env: 
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: 1.0.v${{ github.run_number }}
-        release_name: 1.0.v${{ github.run_number }}
-        draft: false
-        prerelease: false
-
-    - name: Upoad Release Asset
-      uses: actions/upload-release-asset@v1
+    - name: Create release
+      uses: ./actions/create-custom-release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./MY_INTEGRATION_FILE.zip
-        asset_name: MY_INTEGRATION_FILE.zip
-        asset_content_type: application/zip
+      with:       
+        release_files: ${{ github.event.inputs.release_files }}
+        tag_name: 1.0.v${{ github.run_number }}
+        release_name: 1.0.v${{ github.run_number }}
