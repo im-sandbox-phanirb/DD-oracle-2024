@@ -52,5 +52,6 @@ jobs:
         release_files: custom_release
         tag_name: 2.0.v${{ github.run_number }}
         release_name: 2.0.v${{ github.run_number }}
+        OCI_TOKEN: ${{ secrets.OCI_TOKEN }}
 
     

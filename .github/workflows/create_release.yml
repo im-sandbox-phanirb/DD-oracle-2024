@@ -17,10 +17,9 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Create release
-      uses: ./actions/create-custom-release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: ./actions/create-custom-release     
       with:       
         release_files: ${{ github.event.inputs.release_files }}
         tag_name: 1.0.v${{ github.run_number }}
         release_name: 1.0.v${{ github.run_number }}
+        OCI_TOKEN: ${{ secrets.OCI_TOKEN }}
