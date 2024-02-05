@@ -35,29 +35,3 @@ jobs:
         asset_path: ./MY_INTEGRATION_FILE.zip
         asset_name: MY_INTEGRATION_FILE.zip
         asset_content_type: application/zip
-
-    - name: Download Release Asset
-      id: download_release_asset
-      uses: i3h/download-release-asset@v1
-      with:
-        owner: im-sandbox-phanirb
-        repo: DD-oracle-2024
-        tag: ${{ inputs.RELEASE_TAG }}
-        file: MY_INTEGRATION_FILE.zip
-        path: .
-        token: ${{ secrets.OCI_TOKEN }}
-
-    - name: Unzip Artifact
-      run: |
-        unzip -o MY_INTEGRATION_FILE.zip
-
-    - name: check release asset
-      run: |
-        ls -la
-        cd MY_INTEGRATION_FILE
-        ls -la
-        
-      
-        
-        
-    
