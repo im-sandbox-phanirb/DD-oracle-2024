@@ -7,6 +7,11 @@ jobs:
     steps:
     - name: checkout repository
       uses: action/checkout@v3
+
+    - name: Create Zip
+      run: |
+        zip -r MY_INTEGRATION_FILE.zip ./archive
+        
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -35,6 +40,14 @@ jobs:
         owner: im-sandbox-phanirb
         repo: DD-oracle-2024
         tag: ${{ inputs.RELEASE_TAG }}
+        file: MY_INTEGRATION_FILE.zip
+        path: .
+        token: ${{ secrets.OCI_TOKEN }}
+
+    - name: Unzip Artifact
+      run: |
+        unzip -o MY_INTEGRATION_FILE.zip
+      
         
         
     
