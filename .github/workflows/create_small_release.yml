@@ -44,6 +44,19 @@ jobs:
         mkdir custom_release
         cp archive/${{ inputs.file_name }} custom_release
         ls -la custom_release
+        echo "Custom release created"
 
-    
+    - name: Call create release workflow
+      uses: actions/github-script@main
+      with:
+        script: | 
+          github.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  workflow_id: 'create_release.yml',
+                  ref: 'main',
+                  inputs: {
+                    release_files: 'custom_release'                 
+                  }
+                });   
     
